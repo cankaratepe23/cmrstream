@@ -30,7 +30,7 @@ namespace Comarstream
             InitializeComponent();
         }
 
-        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             ObservableCollection<ShowEntry> showEntries = new ObservableCollection<ShowEntry>();
             showsGrid.ItemsSource = showEntries;
@@ -44,29 +44,6 @@ namespace Comarstream
             {
                 showEntries.Add(movie);
             }
-
-            //List<Series> series = new List<Series>();
-            //List<Movie> movies = new List<Movie>();
-            //Series houseMd = await Series.CreateAsync("73255");
-            //houseMd.Path = "/files/House M.D. (2004) The Complete Series [1080p] [BD] [x265] [pseudo]";
-            //houseMd.Seasons[0].Path = houseMd.Path + "/Season 01";
-            //houseMd.Seasons[0].Episodes[0].Path = houseMd.Seasons[0].Path + "/House M.D. S01E01 [1080p] [x265] [pseudo].mkv";
-            //series.Add(houseMd);
-
-            //Movie spiderman1 = await Movie.CreateAsync("301");
-            //spiderman1.Path = "/files/Spider-Man.Trilogy.2002-2007.Mastered.In.4k.1080p.BluRay.DTS.x264-ETRG/Spider-Man.2002.Mastered.In.4k.1080p.BluRay.DTS.x264-ETRG/Spider-Man.2002.Mastered.In.4k.1080p.BluRay.DTS.x264-ETRG.mkv";
-            //movies.Add(spiderman1);
-
-            //Movie spiderman2 = await Movie.CreateAsync("6389");
-            //spiderman2.Path = "/files/Spider-Man.Trilogy.2002-2007.Mastered.In.4k.1080p.BluRay.DTS.x264-ETRG/Spider-Man.2.2004.Mastered.In.4k.1080p.BluRay.DTS.x264-ETRG/Spider-Man.2.2004.Mastered.In.4k.1080p.BluRay.DTS.x264-ETRG.mkv";
-            //movies.Add(spiderman2);
-
-            //Movie spiderman3 = await Movie.CreateAsync("586");
-            //spiderman3.Path = "/files/Spider-Man.Trilogy.2002-2007.Mastered.In.4k.1080p.BluRay.DTS.x264-ETRG/Spider-Man.3.2007.Mastered.In.4k.1080p.BluRay.DTS.x264-ETRG/Spider-Man.3.2007.Mastered.In.4k.1080p.BluRay.DTS.x264-ETRG.mkv";
-            //movies.Add(spiderman3);
-
-            //File.WriteAllText("db_series.json", JsonConvert.SerializeObject(series));
-            //File.WriteAllText("db_movies.json", JsonConvert.SerializeObject(movies));
         }
 
         private void ShowGridItem_LeftMouseDown(object sender, MouseButtonEventArgs e)
