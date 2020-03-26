@@ -45,9 +45,8 @@ namespace Comarstream
                 {
                     series.Seasons.Add(await Season.CreateAsync(i, tvdbId));
                 }
-
-                //ImdbParser parser = new ImdbParser(series.ImdbId);
-                //series.Rating = parser.Rating;
+                ImdbParser parser = new ImdbParser(series.ImdbId);
+                series.Rating = parser.Rating;
             }
             else
             {

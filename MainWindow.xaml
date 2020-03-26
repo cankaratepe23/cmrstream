@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Comarstream"
+        xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="850"
         Background="#121212"
@@ -13,7 +14,123 @@
         <Binding ElementName="mainWindow"/>
     </Window.DataContext>
     <Grid>
-        <ScrollViewer>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+        <Grid Name="navigationGrid" Background="#202020" Grid.Row="0">
+            <Grid>
+                <Viewbox Margin="5,0,0,0" Stretch="Uniform" HorizontalAlignment="Left">
+                    <Button Name="backButton" Click="Back_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Grid>
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup Name="CommonStates">
+                                            <VisualState Name="Normal">
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="0" Duration="0:0:0.1"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState Name="MouseOver">
+                                                <Storyboard>
+                                                    <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="0.1" Duration="0:0:0.1"/>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Rectangle Width="50" Height="50" x:Name="btnImage">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="/res/back.png"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <Rectangle Fill="White" Width="50" Height="50" Opacity="0" x:Name="btnHover">
+                                    </Rectangle>
+                                </Grid>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Viewbox>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Viewbox Margin="0,0,5,0" Stretch="Uniform" HorizontalAlignment="Right">
+                        <Button Visibility="Hidden" local:VisibilityAnimation.AnimationType="Fade" Name="saveButton" Click="Save_Click">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="0" Duration="0:0:0.1"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState Name="MouseOver">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="0.1" Duration="0:0:0.1"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Rectangle RenderTransformOrigin="0.5, 0.5" Width="50" Height="50" x:Name="btnImage">
+                                            <Rectangle.Fill>
+                                                <ImageBrush ImageSource="/res/save.png"/>
+                                            </Rectangle.Fill>
+                                            <Rectangle.RenderTransform>
+                                                <TranslateTransform X="110"/>
+                                            </Rectangle.RenderTransform>
+                                        </Rectangle>
+                                        <Rectangle Fill="White" Width="50" Height="50" Opacity="0" x:Name="btnHover">
+                                        </Rectangle>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Viewbox>
+                    <Viewbox Margin="0,0,5,0" Stretch="Uniform" HorizontalAlignment="Right">
+                        <Button Name="addButton" Click="Add_Click">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Grid>
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup Name="CommonStates">
+                                                <VisualState Name="Normal">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="0" Duration="0:0:0.1"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                                <VisualState Name="MouseOver">
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="0.1" Duration="0:0:0.1"/>
+                                                    </Storyboard>
+                                                </VisualState>
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Rectangle RenderTransformOrigin="0.5, 0.5" Width="50" Height="50" x:Name="btnImage">
+                                            <Rectangle.Fill>
+                                                <ImageBrush ImageSource="/res/add.png"/>
+                                            </Rectangle.Fill>
+                                            <Rectangle.RenderTransform>
+                                                <RotateTransform Angle="0"/>
+                                            </Rectangle.RenderTransform>
+                                        </Rectangle>
+                                        <Rectangle Fill="White" Width="50" Height="50" Opacity="0" x:Name="btnHover">
+                                        </Rectangle>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Viewbox>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <ScrollViewer DataContext="{Binding ElementName=mainWindow}" Name="mainScroller" Grid.Row="1">
             <ItemsControl Name="showsGrid">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -65,12 +182,535 @@
                                         </Style.Triggers>
                                     </Style>
                                 </Border.Style>
-                                <Image Source="{Binding Path=PosterUrl}" MouseLeftButtonDown="ShowGridItem_LeftMouseDown"/>
+                                <Grid>
+                                    <Image Height="50" RenderTransformOrigin="0.5, 0.5" Source="/res/loading.png">
+                                        <Image.RenderTransform>
+                                            <RotateTransform Angle="0"/>
+                                        </Image.RenderTransform>
+                                        <Image.Triggers>
+                                            <EventTrigger RoutedEvent="Loaded">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                                                         To="360" Duration="0:0:0.5" RepeatBehavior="Forever"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Image.Triggers>
+                                    </Image>
+                                    <Image Source="{Binding Path=PosterUrl}"/>
+                                    <Grid>
+                                        <Grid.Style>
+                                            <Style TargetType="Grid">
+                                                <Setter Property="Opacity" Value="0"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Trigger.EnterActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                                     To="1" Duration="0:0:0.2"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </Trigger.EnterActions>
+                                                        <Trigger.ExitActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                                     To="0" Duration="0:0:0.2"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </Trigger.ExitActions>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Grid.Style>
+                                        <Grid Background="Black" Opacity="0.5"/>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Button Grid.Column="0" Click="Play_Click">
+                                                <Button.Template>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Grid>
+                                                            <VisualStateManager.VisualStateGroups>
+                                                                <VisualStateGroup Name="CommonStates">
+                                                                    <VisualState Name="Normal">
+                                                                        <Storyboard>
+                                                                            <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="0" Duration="0:0:0.1"/>
+                                                                        </Storyboard>
+                                                                    </VisualState>
+                                                                    <VisualState Name="MouseOver">
+                                                                        <Storyboard>
+                                                                            <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="1" Duration="0:0:0.1"/>
+                                                                        </Storyboard>
+                                                                    </VisualState>
+                                                                </VisualStateGroup>
+                                                            </VisualStateManager.VisualStateGroups>
+                                                            <Ellipse x:Name="btnImage">
+                                                                <Ellipse.Fill>
+                                                                    <ImageBrush Stretch="Uniform" ImageSource="/res/play.png"/>
+                                                                </Ellipse.Fill>
+                                                            </Ellipse>
+                                                            <Ellipse Opacity="0" x:Name="btnHover">
+                                                                <Ellipse.Fill>
+                                                                    <ImageBrush Stretch="Uniform" ImageSource="/res/play_hover.png"/>
+                                                                </Ellipse.Fill>
+                                                            </Ellipse>
+                                                        </Grid>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+                                            <Button Grid.Column="1" Click="Info_Click">
+                                                <Button.Template>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Grid>
+                                                            <VisualStateManager.VisualStateGroups>
+                                                                <VisualStateGroup Name="CommonStates">
+                                                                    <VisualState Name="Normal">
+                                                                        <Storyboard>
+                                                                            <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="0" Duration="0:0:0.1"/>
+                                                                        </Storyboard>
+                                                                    </VisualState>
+                                                                    <VisualState Name="MouseOver">
+                                                                        <Storyboard>
+                                                                            <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="1" Duration="0:0:0.1"/>
+                                                                        </Storyboard>
+                                                                    </VisualState>
+                                                                </VisualStateGroup>
+                                                            </VisualStateManager.VisualStateGroups>
+                                                            <Ellipse x:Name="btnImage">
+                                                                <Ellipse.Fill>
+                                                                    <ImageBrush Stretch="Uniform" ImageSource="/res/info.png"/>
+                                                                </Ellipse.Fill>
+                                                            </Ellipse>
+                                                            <Ellipse Opacity="0" x:Name="btnHover">
+                                                                <Ellipse.Fill>
+                                                                    <ImageBrush Stretch="Uniform" ImageSource="/res/info_hover.png"/>
+                                                                </Ellipse.Fill>
+                                                            </Ellipse>
+                                                        </Grid>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
                             </Border>
                         </Grid>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
+        <Grid Name="infoGrid" Visibility="Hidden" Background="#121212" local:VisibilityAnimation.AnimationType="Fade" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.75*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Name="overviewGrid" Margin="15" Grid.Column="0">
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical">
+                        <Grid>
+                            <Image MaxHeight="500" Source="{Binding Path=PosterUrl}"/>
+                            <Grid>
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Setter Property="Opacity" Value="0"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Trigger.EnterActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                                     To="1" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.EnterActions>
+                                                <Trigger.ExitActions>
+                                                    <BeginStoryboard>
+                                                        <Storyboard>
+                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                                     To="0" Duration="0:0:0.2"/>
+                                                        </Storyboard>
+                                                    </BeginStoryboard>
+                                                </Trigger.ExitActions>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <Grid Background="Black" Opacity="0.5"/>
+                                <Button Height="100" Width="100" Click="Play_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Grid>
+                                                <VisualStateManager.VisualStateGroups>
+                                                    <VisualStateGroup Name="CommonStates">
+                                                        <VisualState Name="Normal">
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="0" Duration="0:0:0.1"/>
+                                                            </Storyboard>
+                                                        </VisualState>
+                                                        <VisualState Name="MouseOver">
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="1" Duration="0:0:0.1"/>
+                                                            </Storyboard>
+                                                        </VisualState>
+                                                    </VisualStateGroup>
+                                                </VisualStateManager.VisualStateGroups>
+                                                <Ellipse x:Name="btnImage">
+                                                    <Ellipse.Fill>
+                                                        <ImageBrush Stretch="Uniform" ImageSource="/res/play.png"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                                <Ellipse Opacity="0" x:Name="btnHover">
+                                                    <Ellipse.Fill>
+                                                        <ImageBrush Stretch="Uniform" ImageSource="/res/play_hover.png"/>
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </Grid>
+                        </Grid>
+                        <Grid Name="ratingGrid">
+                            <TextBlock Margin="0,5,0,0" FontSize="18" Text="{Binding Path=Name}"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Image Margin="0,4,3,0" Height="28" Width="28" VerticalAlignment="Center" HorizontalAlignment="Right" Source="/res/imdb_star.png"/>
+                                <TextBlock Margin="0,5,0,0" Name="imdbRating" FontSize="18" HorizontalAlignment="Right" TextAlignment="Right">
+                                    <TextBlock.Text>
+                                        <Binding StringFormat="{}{0}/10" Path="Rating"/>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </StackPanel>
+                            <Separator Margin="0,10,0,0"  VerticalAlignment="Bottom"/>
+                        </Grid>
+                        <TextBlock Name="descriptionBlock" FontSize="14" TextAlignment="Center" Text="{Binding Path=Description}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+            <Grid Name="seasonsGrid" Margin="15" Grid.Column="1" Visibility="Hidden">
+                <ScrollViewer>
+                    <ItemsControl Name="seasonsIC">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Border>
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Height" Value="250"/>
+                                                <Setter Property="Width" Value="180"/>
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                <Setter Property="Padding" Value="15"/>
+                                                <Setter Property="Effect">
+                                                    <Setter.Value>
+                                                        <DropShadowEffect Color="Black" Direction="270" BlurRadius="15" ShadowDepth="3"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Style.Triggers>
+                                                    <Trigger Property="Border.IsMouseOver" Value="True">
+                                                        <Trigger.EnterActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <ThicknessAnimation Storyboard.TargetProperty="Padding"
+                                                                                To="10" Duration="0:0:0.2"/>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="(Effect).BlurRadius"
+                                                                             To="25" Duration="0:0:0.2"/>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="(Effect).ShadowDepth"
+                                                                             To="8" Duration="0:0:0.2"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </Trigger.EnterActions>
+                                                        <Trigger.ExitActions>
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <ThicknessAnimation Storyboard.TargetProperty="Padding"
+                                                                                To="15" Duration="0:0:0.2"/>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="(Effect).BlurRadius"
+                                                                             To="15" Duration="0:0:0.2"/>
+                                                                    <DoubleAnimation Storyboard.TargetProperty="(Effect).ShadowDepth"
+                                                                             To="3" Duration="0:0:0.2"/>
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </Trigger.ExitActions>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <Grid>
+                                            <Image Height="50" RenderTransformOrigin="0.5, 0.5" Source="/res/loading.png">
+                                                <Image.RenderTransform>
+                                                    <RotateTransform Angle="0"/>
+                                                </Image.RenderTransform>
+                                                <Image.Triggers>
+                                                    <EventTrigger RoutedEvent="Loaded">
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                                                         To="360" Duration="0:0:0.5" RepeatBehavior="Forever"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
+                                                </Image.Triggers>
+                                            </Image>
+                                            <Image Source="{Binding Path=PosterUrl}"/>
+                                            <Grid>
+                                                <Grid.Style>
+                                                    <Style TargetType="Grid">
+                                                        <Setter Property="Opacity" Value="0"/>
+                                                        <Style.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Trigger.EnterActions>
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                                     To="1" Duration="0:0:0.2"/>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </Trigger.EnterActions>
+                                                                <Trigger.ExitActions>
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                                                                     To="0" Duration="0:0:0.2"/>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </Trigger.ExitActions>
+                                                            </Trigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </Grid.Style>
+                                                <Grid Background="Black" Opacity="0.5"/>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Button Grid.Column="0" Click="Play_Click">
+                                                        <Button.Template>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Grid>
+                                                                    <VisualStateManager.VisualStateGroups>
+                                                                        <VisualStateGroup Name="CommonStates">
+                                                                            <VisualState Name="Normal">
+                                                                                <Storyboard>
+                                                                                    <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="0" Duration="0:0:0.1"/>
+                                                                                </Storyboard>
+                                                                            </VisualState>
+                                                                            <VisualState Name="MouseOver">
+                                                                                <Storyboard>
+                                                                                    <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="1" Duration="0:0:0.1"/>
+                                                                                </Storyboard>
+                                                                            </VisualState>
+                                                                        </VisualStateGroup>
+                                                                    </VisualStateManager.VisualStateGroups>
+                                                                    <Ellipse x:Name="btnImage">
+                                                                        <Ellipse.Fill>
+                                                                            <ImageBrush Stretch="Uniform" ImageSource="/res/play.png"/>
+                                                                        </Ellipse.Fill>
+                                                                    </Ellipse>
+                                                                    <Ellipse Opacity="0" x:Name="btnHover">
+                                                                        <Ellipse.Fill>
+                                                                            <ImageBrush Stretch="Uniform" ImageSource="/res/play_hover.png"/>
+                                                                        </Ellipse.Fill>
+                                                                    </Ellipse>
+                                                                </Grid>
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                    </Button>
+                                                    <Button Grid.Column="1" Click="Info_Click">
+                                                        <Button.Template>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Grid>
+                                                                    <VisualStateManager.VisualStateGroups>
+                                                                        <VisualStateGroup Name="CommonStates">
+                                                                            <VisualState Name="Normal">
+                                                                                <Storyboard>
+                                                                                    <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="0" Duration="0:0:0.1"/>
+                                                                                </Storyboard>
+                                                                            </VisualState>
+                                                                            <VisualState Name="MouseOver">
+                                                                                <Storyboard>
+                                                                                    <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="1" Duration="0:0:0.1"/>
+                                                                                </Storyboard>
+                                                                            </VisualState>
+                                                                        </VisualStateGroup>
+                                                                    </VisualStateManager.VisualStateGroups>
+                                                                    <Ellipse x:Name="btnImage">
+                                                                        <Ellipse.Fill>
+                                                                            <ImageBrush Stretch="Uniform" ImageSource="/res/info.png"/>
+                                                                        </Ellipse.Fill>
+                                                                    </Ellipse>
+                                                                    <Ellipse Opacity="0" x:Name="btnHover">
+                                                                        <Ellipse.Fill>
+                                                                            <ImageBrush Stretch="Uniform" ImageSource="/res/info_hover.png"/>
+                                                                        </Ellipse.Fill>
+                                                                    </Ellipse>
+                                                                </Grid>
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                    </Button>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+            <Grid Name="episodesGrid" Margin="15" Grid.Column="1" Visibility="Hidden">
+                <ScrollViewer>
+                    <ItemsControl Name="episodesIC">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Border Margin="5" BorderBrush="#181818" BorderThickness="1">
+                                        <Border.Style>
+                                            <Style TargetType="Border">
+                                                <Setter Property="Width" Value="450"/>
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                <Setter Property="Effect">
+                                                    <Setter.Value>
+                                                        <DropShadowEffect Color="Black" Direction="270" BlurRadius="15" ShadowDepth="3"/>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Border.Style>
+                                    </Border>
+
+                                    <Grid Margin="5" Background="#181818">
+                                        <Grid.Style>
+                                            <Style TargetType="Grid">
+                                                <Setter Property="Width" Value="450"/>
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            </Style>
+                                        </Grid.Style>
+                                        <StackPanel Orientation="Vertical">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Margin="10,10,10,0" FontSize="20">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0} • {1}">
+                                                            <Binding Path="EpisodeNumber"/>
+                                                            <Binding Path="Name"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                                <Button Margin="5,5,0,0" Height="40" Width="40" Click="Play_Click">
+                                                    <Button.Template>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Grid>
+                                                                <VisualStateManager.VisualStateGroups>
+                                                                    <VisualStateGroup Name="CommonStates">
+                                                                        <VisualState Name="Normal">
+                                                                            <Storyboard>
+                                                                                <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="0" Duration="0:0:0.1"/>
+                                                                            </Storyboard>
+                                                                        </VisualState>
+                                                                        <VisualState Name="MouseOver">
+                                                                            <Storyboard>
+                                                                                <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="1" Duration="0:0:0.1"/>
+                                                                            </Storyboard>
+                                                                        </VisualState>
+                                                                    </VisualStateGroup>
+                                                                </VisualStateManager.VisualStateGroups>
+                                                                <Ellipse x:Name="btnImage">
+                                                                    <Ellipse.Fill>
+                                                                        <ImageBrush Stretch="Uniform" ImageSource="/res/play.png"/>
+                                                                    </Ellipse.Fill>
+                                                                </Ellipse>
+                                                                <Ellipse Opacity="0" x:Name="btnHover">
+                                                                    <Ellipse.Fill>
+                                                                        <ImageBrush Stretch="Uniform" ImageSource="/res/play_hover.png"/>
+                                                                    </Ellipse.Fill>
+                                                                </Ellipse>
+                                                            </Grid>
+                                                        </ControlTemplate>
+                                                    </Button.Template>
+                                                </Button>
+                                                <Button Margin="0,5,0,0" Height="40" Width="40" Click="Info_Click">
+                                                    <Button.Template>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Grid>
+                                                                <VisualStateManager.VisualStateGroups>
+                                                                    <VisualStateGroup Name="CommonStates">
+                                                                        <VisualState Name="Normal">
+                                                                            <Storyboard>
+                                                                                <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="0" Duration="0:0:0.1"/>
+                                                                            </Storyboard>
+                                                                        </VisualState>
+                                                                        <VisualState Name="MouseOver">
+                                                                            <Storyboard>
+                                                                                <DoubleAnimation Storyboard.TargetName="btnHover" Storyboard.TargetProperty="Opacity"
+                                                                                             To="1" Duration="0:0:0.1"/>
+                                                                            </Storyboard>
+                                                                        </VisualState>
+                                                                    </VisualStateGroup>
+                                                                </VisualStateManager.VisualStateGroups>
+                                                                <Ellipse x:Name="btnImage">
+                                                                    <Ellipse.Fill>
+                                                                        <ImageBrush Stretch="Uniform" ImageSource="/res/info.png"/>
+                                                                    </Ellipse.Fill>
+                                                                </Ellipse>
+                                                                <Ellipse Opacity="0" x:Name="btnHover">
+                                                                    <Ellipse.Fill>
+                                                                        <ImageBrush Stretch="Uniform" ImageSource="/res/info_hover.png"/>
+                                                                    </Ellipse.Fill>
+                                                                </Ellipse>
+                                                            </Grid>
+                                                        </ControlTemplate>
+                                                    </Button.Template>
+                                                </Button>
+                                            </StackPanel>
+                                            <TextBlock Margin="10" TextWrapping="Wrap" FontSize="14" Text="{Binding Path=Description}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+            <Grid Name="peopleGrid" Margin="15" Grid.Column="1" Visibility="Hidden">
+                <TextBlock Text="PEOPLE GRID IS NOT YET IMPLEMENTED" FontSize="100" Foreground="Red"/>
+            </Grid>
+        </Grid>
+        <Grid DataContext="{Binding ElementName=mainWindow}" Name="addGrid" Visibility="Hidden" Background="#121212" local:VisibilityAnimation.AnimationType="Fade" Grid.Row="1">
+            <StackPanel Orientation="Vertical">
+                <Label Content="ID"/>
+                <TextBox Text="{Binding TvdbId, Mode=TwoWay}"/>
+                <Label Content="Root Path"/>
+                <TextBox Text="{Binding RootPath, Mode=TwoWay}"/>
+            </StackPanel>
+            <Grid Name="saveStatusGrid" Background="Black" Opacity="0.8" Visibility="Hidden">
+                <TextBlock FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" Text="{Binding SaveStatus}"/>
+            </Grid>
+        </Grid>
     </Grid>
 </Window>

@@ -5,6 +5,7 @@
         public int EpisodeNumber { get; set; }
         public int SeasonNumber { get; set; }
         public string SeriesId { get; set; }
+        public string PosterUrl { get; set; }
 
         public static Episode CreateEpisode(int episodeNumber, int seasonNumber, string seriesId, dynamic jsonObj)
         {
@@ -19,6 +20,8 @@
             episode.TvdbId = episodeData.id;
             episode.ImdbId = episodeData.imdbId;
             episode.Description = episodeData.overview;
+            //ImdbParser parser = new ImdbParser(episode.ImdbId); //TODO Make sure this works!
+            //episode.Rating = parser.Rating;
             return episode;
         }
     }
