@@ -60,6 +60,13 @@ namespace Comarstream
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            Settings.Default.Reload();
+            if (String.IsNullOrWhiteSpace(Settings.Default.FTP_Host))
+            {
+                SettingsWindow settingsWindow = new SettingsWindow();
+                settingsWindow.ShowDialog();
+                Settings.Default.Reload();
+            }
             showsGrid.ItemsSource = ShowEntries;
             CollectionViewSource.GetDefaultView(showsGrid.ItemsSource).SortDescriptions.Add(new SortDescription("Name", ListSortDirection.Ascending));
             UpdateEntries();
