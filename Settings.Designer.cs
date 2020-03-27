@@ -82,5 +82,17 @@ namespace Comarstream {
                 this["FTP_Host"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MediaPlayerPath {
+            get {
+                return ((string)(this["MediaPlayerPath"]));
+            }
+            set {
+                this["MediaPlayerPath"] = value;
+            }
+        }
     }
 }

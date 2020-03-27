@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
 
 namespace Comarstream
 {
@@ -26,10 +23,8 @@ namespace Comarstream
             {
                 return false;
             }
-            else
-            {
-                return Equals(showEntry);
-            }
+
+            return Equals(showEntry);
         }
 
         public bool Equals(ShowEntry other)
@@ -38,7 +33,13 @@ namespace Comarstream
             {
                 return false;
             }
-            return this.TvdbId == other.TvdbId;
+            return TvdbId == other.TvdbId;
+        }
+
+        public override int GetHashCode()
+        {
+            // ReSharper disable once NonReadonlyMemberInGetHashCode
+            return Convert.ToInt32(TvdbId);
         }
     }
 }

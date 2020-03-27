@@ -4,18 +4,25 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Version>0.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="res\add.png" />
     <None Remove="res\back.png" />
+    <None Remove="res\directory.png" />
+    <None Remove="res\File.png" />
+    <None Remove="res\Folder.png" />
     <None Remove="res\imdb_star.png" />
     <None Remove="res\info.png" />
     <None Remove="res\info_hover.png" />
     <None Remove="res\loading.png" />
     <None Remove="res\play.png" />
     <None Remove="res\play_hover.png" />
+    <None Remove="res\refresh.png" />
     <None Remove="res\save.png" />
+    <None Remove="res\settings.png" />
+    <None Remove="res\video.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +34,8 @@
   <ItemGroup>
     <Resource Include="res\add.png" />
     <Resource Include="res\back.png" />
+    <Resource Include="res\directory.png" />
+    <Resource Include="res\file.png" />
     <Resource Include="res\imdb_star.png" />
     <Resource Include="res\info.png" />
     <Resource Include="res\info_hover.png" />
@@ -35,7 +44,10 @@
     </Resource>
     <Resource Include="res\play.png" />
     <Resource Include="res\play_hover.png" />
+    <Resource Include="res\refresh.png" />
     <Resource Include="res\save.png" />
+    <Resource Include="res\settings.png" />
+    <Resource Include="res\video.png" />
   </ItemGroup>
 
   <ItemGroup>

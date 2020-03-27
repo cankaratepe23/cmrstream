@@ -38,15 +38,18 @@ namespace Comarstream
                         break;
                     }
                 }
-                movie.Name = primaryTranslation.name;
-                foreach (var remoteId in jsonObj.data.remoteids)
+                if (primaryTranslation != null)
                 {
-                    if (remoteId["source_name"] == "IMDB")
+                    movie.Name = primaryTranslation.name;
+                    foreach (dynamic remoteId in jsonObj.data.remoteids)
                     {
-                        movie.ImdbId = remoteId.id;
+                        if (remoteId["source_name"] == "IMDB")
+                        {
+                            movie.ImdbId = remoteId.id;
+                        }
                     }
+                    movie.Description = primaryTranslation.overview; 
                 }
-                movie.Description = primaryTranslation.overview;
                 movie.PosterUrl = string.Format("https://artworks.thetvdb.com/banners/movies/{0}/posters/{0}.jpg", tvdbId);
             }
             else

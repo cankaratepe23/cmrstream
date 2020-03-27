@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Comarstream
@@ -29,8 +28,7 @@ namespace Comarstream
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Settings.Default.TVDB_Token);
 
-            HttpResponseMessage response = await client.GetAsync(tvdbId + "/filter" +
-                "?keys=seriesName%2Cid%2CimdbId%2Coverview%2Cposter%2Cseason");
+            HttpResponseMessage response = await client.GetAsync($"{tvdbId}/filter?keys=seriesName%2Cid%2CimdbId%2Coverview%2Cposter%2Cseason");
             if (response.IsSuccessStatusCode)
             {
                 string jsonStr = await response.Content.ReadAsStringAsync();

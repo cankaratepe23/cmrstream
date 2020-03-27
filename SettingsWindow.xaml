@@ -6,9 +6,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Comarstream"
         mc:Ignorable="d"
-        Title="SettingsWindow" Height="500" Width="400"
+        Title="SettingsWindow"
+        Width="333"
+        SizeToContent="Height"
         Background="#161616">
-    <Grid DataContext="{Binding ElementName=SettingsWindowDialog}">
+    <Grid Margin="20" DataContext="{Binding ElementName=SettingsWindowDialog}">
         <StackPanel>
             <Label Content="Hostname"/>
             <TextBox Text="{Binding Hostname, Mode=TwoWay}"/>
@@ -16,9 +18,13 @@
             <TextBox Text="{Binding Username, Mode=TwoWay}"/>
             <Label Content="Password"/>
             <TextBox Text="{Binding Password, Mode=TwoWay}"/>
+            <Label Content="Media Player Path"/>
+            <TextBox Text="{Binding MediaPlayerPath, Mode=TwoWay}"/>
             <Label Content="theTVDB Token"/>
             <TextBox Text="{Binding Token, Mode=TwoWay}"/>
-            <Button Content="OK" Click="Button_Click"/>
+            <Button Margin="0,20,0,0" Height="30"  Click="Button_Click">
+                <TextBlock Text="Save" Foreground="Black"/>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>
