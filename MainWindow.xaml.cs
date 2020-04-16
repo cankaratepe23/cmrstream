@@ -389,14 +389,14 @@ namespace Comarstream
                     break;
                 }
             }
-            ftpClient.Dispose();
             seriesToAdd.Path = RootPath;
             _series.Add(seriesToAdd);
             SaveStatus = "Writing to file";
             File.WriteAllText("db_series.json", JsonConvert.SerializeObject(_series));
             SaveStatus = "Uploading to server";
-            await ftpClient.UploadFileAsync("db_series.json", "/files/Çomarstream");
+            await ftpClient.UploadFileAsync("db_series.json", "/files/Çomarstream/db_series.json");
             SaveStatus = "Done!";
+            ftpClient.Dispose();
             UpdateEntries();
             Add_Click(sender, e);
         }
